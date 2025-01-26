@@ -108,7 +108,7 @@
         }
 
         .image-section {
-            background: url('./fubuli.jpg') center/cover no-repeat;
+            background: url('./src/fubuli.jpg') center/cover no-repeat;
             flex: 1;
             border-radius: 2rem;
             box-shadow: -5px 5px 5px 0px rgba(0, 0, 0, 0.75);
@@ -124,7 +124,7 @@
         @media (max-width: 768px) {
             body {
                 padding: 10px;
-                background-image: url("fubuli.jpg");
+                background-image: url("./src/fubuli.jpg");
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
@@ -183,7 +183,7 @@
             if (confirm("Are you sure you want to reset all stored data?")) {
                 localStorage.clear(); // Clear all localStorage data
                 alert("Local storage reset successfully!");
-                window.location.href = "signup.html"; // Redirect to Signup Page
+                window.location.href = "index.html"; // Redirect to Signup Page
             }
         });
     </script>
