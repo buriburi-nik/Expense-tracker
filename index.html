@@ -23,6 +23,7 @@
             background-color: #EE4860;
             color: #111;
             padding: 2rem;
+            min-height: 100vh;
         }
 
         h1 {
@@ -125,6 +126,25 @@
 
         #signupForm{
             text-align: left;  color :#111;
+        }
+
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                background-image: url("./sakura.jpg");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .image-section {
+                display: none;
+            }
         }
 
 
