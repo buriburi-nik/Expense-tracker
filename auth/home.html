@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Expense Tracker AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 2rem;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #EE4860;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .welcome-message {
+            font-size: 18px;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content h1 {
+            font-size: 32px;
+            color: #333;
+        }
+    
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">My Website</div>
+        <div class="welcome-message" id="welcomeMessage">Welcome, Guest!</div>
+    </header>
+    
+    <div class="content">
+        <h1>Welcome to the website!</h1>
+        <p>Enjoy your personalized experience.</p>
+    </div>
+    
+    <script>
+        // Retrieve the user's name from localStorage
+        const name = localStorage.getItem('signupName') || 'Guest';
+
+        // Display the name in the header
+        document.getElementById('welcomeMessage').textContent = `Welcome, ${name}!`;
+    </script>
+    <main class="container">
+        <h1>Welcome to Expense Tracker AI</h1>
+        <p>Track your expenses efficiently and effortlessly!</p>
+        <a href="login.html" role="button" class="secondary">Logout</a>
+    </main>
+</body>
+
+</html>
