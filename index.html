@@ -4,153 +4,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup - Expense Tracker AI</title>
-    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <title>Registion</title>
     <style>
+        /*=============== VARIABLES CSS ===============*/
         :root {
-            --accent-color: #EE4860;
-            --accent-color-dark: #d6404e;
+            --primary-color: hsl(208, 92%, 54%);
+            --title-color: hsl(220, 68%, 4%);
+            --text-color: hsl(220, 15%, 66%);
+            --background-color: hsl(0, 0%, 100%);
+            --input-bg: hsl(220, 50%, 97%);
+            --button-color: hsl(208, 92%, 54%);
+            --button-hover: hsl(208, 88%, 50%);
+            --body-font: "Montserrat", sans-serif;
+
+            /*========== Font and typography ==========*/
+            /*.5rem = 8px | 1rem = 16px ...*/
+            --body-font: "Montserrat", system-ui;
+            --big-font-size: 3rem;
+            --normal-font-size: .938rem;
+            --small-font-size: .9rem;
+            --tiny-font-size: .688rem;
+
+            /*========== Font weight ==========*/
+            --font-regular: 400;
+            --font-medium: 500;
+            --font-semi-bold: 600;
+
+            /*========== z index ==========*/
+            --z-tooltip: 10;
+            --z-fixed: 100;
         }
 
 
-        *{
-            margin: 0;
-            padding: 0;
+
+
+
+
+        /*=============== BASE STYLES ===============*/
+        * {
             box-sizing: border-box;
+            padding: 0;
+            margin: 0;
         }
 
         body {
-            background-color: #EE4860;
-            color: #111;
-            padding: 2rem;
-            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            height: 100vh;
+            background-color: var(--background-color);
+            font-family: var(--body-font);
+            justify-content: flex-start;
+            /* Changed from center to flex-start */
             align-items: center;
-             padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--accent-color);
+            padding-left: 20px;
+            /* Optional: adds some space on the left */
         }
 
         .container {
-            margin: 0 auto;
-            border: 3px solid var(--accent-color);
-            display: flex;
-            flex-wrap: wrap;
-            background: #fff;
-            border-radius: 2rem;
-            overflow: hidden;
-            text-align: center;
-            box-shadow: -10px 13px 13px 0px rgba(0, 0, 0, 0.75);
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-            background-color: rgb(245, 245, 245);
-        }
-
-        input:focus {
-           border-color: #ffa500;
-            outline: none;
-            box-shadow: 0 0 4px rgba(255, 165, 0, 0.6);
-            color: #333;
-        
-        }
-
-        button {
-            background-color: #FFA500;
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            padding: 0.75rem 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        button:hover {
-            background-color: #e69500;
-        }
-
-        button:focus {
-            outline: 2px solid #ffa500;
-            outline-offset: 2px;
-        }
-
-        .error-message {
-            color: var(--accent-color);
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .li {
-            padding: 40px;
+            margin-left: 10rem;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            flex: 1;
-            width: 100%;
-        }
-
-        .image-section {
-            background: url('./src/sakura.jpg') center/cover no-repeat;
-            flex: 1;
-            border-radius: 2rem;
-            box-shadow: -5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-            border: 3px solid var(--accent-color);
-        }
-
-        h1{
-            font-size: 28px;
-            margin-bottom: 16px;
-            color: #111;
             align-items: center;
-            gap: 8px;
+            width: 700px;
+            height: auto;
+            align-items: center;
+            justify-content: flex-start;
+            background: var(--background-color);
+            /* border-radius: 20px; */
+            overflow: hidden;
+            /* box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); */
         }
 
-        #signupForm{
-            text-align: left;  color :#111;
+        .form-section {
+            width: 65%;
+            /* padding:0 50px; */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-                background-image: url("./src/sakura.jpg");
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-            }
-            .container {
-                flex-direction: column;
-                height: auto;
-            }
+        .container h1 {
+            font-size: 48px;
+            color: var(--title-color);
+            letter-spacing: normal;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--title-color);
+            margin-bottom: 1.5rem;
+        }
 
-            .image-section {
-                display: none;
+        .form-section input {
+            width: 100%;
+            padding: 25px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: var(--input-bg);
+            font-size: 16px;
+        }
+
+        .form-section input:focus {
+            border-color: var(--button-color);
+            outline: none;
+        }
+
+        .form-section button {
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+            font-size: 1rem;
+            background-color: var(--first-color);
+            color: white;
+            font-weight: var(--font-semi-bold);
+            background: var(--button-hover);
+            padding-block: 1.5rem;
+            border-radius: 4rem;
+            margin-block: 1.2rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color .4s, box-shadow .4s;
+        }
+
+        .form-section button:hover {
+            background-color: var(--first-color);
+            color: var(--white-color);
+            box-shadow: 0 8px 24px hsla(208, 92%, 32%, .3);
+        }
+
+
+        .signup-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14.5px;
+            color: var(--text-color);
+        }
+
+        .signup-text a {
+            color: var(--button-color);
+            text-decoration: none;
+            font-weight: bold;
+            
+        }
+
+
+
+        .login__blob {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            z-index: -1;
+        }
+
+
+        @media screen and (min-width: 1150px) {
+
+
+            .login__blob {
+                display: block;
+                height: 100vh;
             }
         }
+
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            background: transparent transparent;
+            padding: 8px;
+        }
+
+@media screen and (max-width: 768px) {
+    body {
+        justify-content: center;
+        align-items: center;
+        padding: 0; /* Remove padding for small screens */
+    }
+
+    .container {
+        margin-left: 0;
+        width: 90%;
+    }
+
+    .form-section {
+        width: 90%;
+    }
+
+    .container h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .form-section input,
+    .form-section button {
+        font-size: 1rem;
+        padding: 15px;
+    }
+
+    .signup-text {
+        font-size: 0.9rem;
+    }
+
+    .login__blob {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        flex-direction: column; 
+    }
+
+    .container h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-section input,
+    .form-section button {
+        font-size: 0.875rem;
+        padding: 10px;
+    }
+
+    .signup-text {
+        font-size: 0.8rem;
+    }
+}
+
 
 
     </style>
@@ -158,58 +237,67 @@
 
 <body>
     <div class="container">
-        <div class="li">
-            <h1>Create new account.</h1>
-
+        <h1 class="login__title">Create new account.</h1>
+        <div class="form-section">
             <form id="signupForm">
-                <label for="signupName">Name:</label>
                 <input type="text" id="signupName" placeholder="Enter your name" required>
-                <label for="signupEmail">Email:</label>
                 <input type="email" id="signupEmail" placeholder="Enter your email" required>
-                <label for="signupPassword">Password:</label>
                 <input type="password" id="signupPassword" placeholder="Create a password" required minlength="6">
-                <label for="signupConfirmPassword">Confirm Password:</label>
                 <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
-                <button type="submit">Create account</button>
                 <p class="error-message" id="signupError"></p>
-                <p>
-                    Already have an account? <a href="./auth/login.html">Login here</a>.
-                </p>
+                <button type="submit">Create account</button>
+                <p class="signup-text">Already have an account? <a href="./auth/login.html" class="reset-button" id="resetStorage">Log in</a></p>
+                       
             </form>
         </div>
-        <div class="image-section"></div>
     </div>
 
-    <script>
-        // Signup Form Handling
-        document.getElementById('signupForm').addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevent form submission
+    <svg class="login__blob" viewBox="0 0 566 840" xmlns="http://www.w3.org/2000/svg">
+        <mask id="mask0" mask-type="alpha">
+            <path d="M342.407 73.6315C388.53 56.4007 394.378 17.3643 391.538 
+                        0H566V840H0C14.5385 834.991 100.266 804.436 77.2046 707.263C49.6393 
+                        591.11 115.306 518.927 176.468 488.873C363.385 397.026 156.98 302.824 
+                        167.945 179.32C173.46 117.209 284.755 95.1699 342.407 73.6315Z" />
+        </mask>
 
-            const name = document.getElementById('signupName').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+        <g mask="url(#mask0)">
+            <path d="M342.407 73.6315C388.53 56.4007 394.378 17.3643 391.538 
+                        0H566V840H0C14.5385 834.991 100.266 804.436 77.2046 707.263C49.6393 
+                        591.11 115.306 518.927 176.468 488.873C363.385 397.026 156.98 302.824 
+                        167.945 179.32C173.46 117.209 284.755 95.1699 342.407 73.6315Z" />
 
-            if (password.length < 6) {
-                document.getElementById('signupError').textContent = "Password must be at least 6 characters.";
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                document.getElementById('signupError').textContent = "Passwords do not match.";
-                return;
-            }
-
-            // Store user data in localStorage
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userPassword', password);
-            localStorage.setItem('signupName', name);
-
-            // Simulated Signup Success
-            alert("Signup successful! Redirecting to login page...");
-            window.location.href = "./auth/login.html"; // Redirect to Login Page
-        });
-    </script>
+            <image class="login__img" href="/img/bg-img.jpg" />
+        </g>
+    </svg>
 </body>
+
+<script>
+
+    document.getElementById('signupForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById('signupName').value;
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+        if (password.length < 6) {
+            document.getElementById('signupError').textContent = "Password must be at least 6 characters.";
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            document.getElementById('signupError').textContent = "Passwords do not match.";
+            return;
+        }
+
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userPassword', password);
+        localStorage.setItem('signupName', name);
+
+        alert("Signup successful! Redirecting to login page...");
+        window.location.href = "./auth/login.html";
+    });
+</script>
 
 </html>
