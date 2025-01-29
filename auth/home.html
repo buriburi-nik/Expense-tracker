@@ -4,74 +4,708 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Expense Tracker AI</title>
-    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <title>Advanced Expense Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
-        body {
-            padding: 2rem;
+        /*=============== VARIABLES CSS ===============*/
+        :root {
+            --primary-color: hsl(208, 92%, 54%);
+            --title-color: hsl(220, 68%, 4%);
+            --text-color: hsl(220, 15%, 66%);
+            --background-color: hsl(0, 0%, 100%);
+            --input-bg: hsl(220, 50%, 97%);
+            --button-color: hsl(208, 92%, 54%);
+            --button-hover: hsl(208, 88%, 50%);
+            --body-font: "Montserrat", sans-serif;
+
+            --big-font-size: 3rem;
+            --normal-font-size: .938rem;
+            --small-font-size: .9rem;
+            --tiny-font-size: .688rem;
+
+            --font-regular: 400;
+            --font-medium: 500;
+            --font-semi-bold: 600;
+
+            --z-tooltip: 10;
+            --z-fixed: 100;
         }
-        
-        body {
+
+        /*=============== BASE STYLES ===============*/
+        * {
+            box-sizing: border-box;
+            padding: 0;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            background-color: var(--background-color);
+            font-family: var(--body-font);
+            align-items: center;
+            /* padding: 20px; */
+        
         }
 
         header {
-            background-color: #EE4860;
-            color: #fff;
-            padding: 10px 20px;
+            text-align: center;
+            margin-bottom: 2rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100vw;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--title-color);
+            margin-bottom: 0.5rem;
         }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        section {
+            width: 80%;
+            max-width: 800px;
+            margin-bottom: 3rem;
+            background-color: var(--background-color);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: var(--title-color);
+            margin-bottom: 1rem;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        form input,
+        form select,
+        form button {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: var(--input-bg);
+        }
+
+        form input:focus,
+        form select:focus {
+            border-color: var(--button-color);
+            outline: none;
+        }
+
+        form button{
+            background-color: var(--button-color);
+            color: white;
+            font-weight: var(--font-semi-bold);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.4s, box-shadow 0.4s;
+        }
+
+        form button:hover {
+            background-color: var(--button-hover);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-top: 2rem;
+            padding: 20px;
+        }
+
+        /* Mobile Responsive */
+        @media screen and (max-width: 768px) {
+            body {
+                justify-content: center;
+                padding: 10px;
+            }
+
+            section {
+                width: 100%;
+            }
+
+            .welcome-message{
+                display: none;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            form input,
+            form select,
+            form button {
+                font-size: 1rem;
+            }
+
+            .bingo{
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+
 
         .welcome-message {
             font-size: 18px;
+            width: 40px;
         }
 
-        .content {
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
-            text-align: center;
         }
 
-        .content h1 {
-            font-size: 32px;
-            color: #333;
+        .secondary{
+            width: 100%;
+
         }
+
+        a{
+            text-decoration: none;
+              color: var(--button-color);
+        }
+
+        a:hover{
+            color: var(--button-hover);
+        }
+
+
+        button{
+            font-weight: var(--font-semi-bold);
+            border: none;
+            cursor: pointer;
+            background-color: transparent;
+            transition: background-color 0.4s, box-shadow 0.4s;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+          
+        }
+
+        button:hover {
+            background-color: transparent;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     
+        }
+
+        /* Bingo Table */
+       .bingo {
+        display: flex;
+        width: 80%;
+        justify-content: space-between;
+        gap: 2rem;
+       }
     </style>
 </head>
 
 <body>
     <header>
-        <div class="logo">My Website</div>
-        <div class="welcome-message" id="welcomeMessage">Welcome, Guest!</div>
-    </header>
-    
-    <div class="content">
-        <h1>Welcome to the website!</h1>
-        <p>Enjoy your personalized experience.</p>
-    </div>
-    
-    <script>
-        // Retrieve the user's name from localStorage
-        const name = localStorage.getItem('signupName') || 'Guest';
+       
+        <div class="welcome-message"  id="welcomeMessage">Welcome, Guest!</div>
+        <div style="padding:1rem;">
+            <h1>Expense Tracker</h1>
+            <p>Track expenses, set budgets, and monitor trends easily.</p>
+        </div>
+        <button class="new" onclick="window.location.href='login.html'">Logout</button>
 
-        // Display the name in the header
-        document.getElementById('welcomeMessage').textContent = `Welcome, ${name}!`;
-    </script>
-    <main class="container">
-        <h1>Welcome to Expense Tracker AI</h1>
-        <p>Track your expenses efficiently and effortlessly!</p>
-        <a href="login.html" role="button" class="secondary">Logout</a>
+        <script>
+            // Retrieve the user's name from localStorage
+            const name = localStorage.getItem('signupName') || 'Guest';
+
+            // Display the name in the header
+            document.getElementById('welcomeMessage').textContent = `Welcome, ${name}!`;
+        </script>
+    </header>
+
+    <main>
+        <div class="bingo">
+
+        <!-- Budget and Alerts -->
+        <section class="budget">
+            <h2>Set Budget</h2>
+            <form id="budget-form">
+                <label for="budget-amount">Budget Limit (₹):</label>
+                <input type="number" id="budget-amount" placeholder="Enter your budget limit" required>
+                <button type="submit">Set Budget</button>
+            </form>
+            <p id="budget-status">No budget set yet.</p>
+            <img src="../img/money.gif" style=" width: 100%; height: auto;" alt="">
+        </section>
+            
+        <!-- Expense Form -->
+        <section class="tracker">
+            <h2>Add Expense</h2>
+            <form id="expense-form">
+                <!-- <label for="project-name">Project Name:</label>
+                <input type="text" id="project-name" placeholder="Enter project name" required> -->
+
+                <label for="expense-name">Expense Name:</label>
+                <input type="text" id="expense-name" placeholder="Enter expense name" required>
+
+                <label for="expense-amount">Amount (₹):</label>
+                <input type="number" id="expense-amount" placeholder="Enter amount" required>
+
+                <label for="expense-category">Category:</label>
+                <select id="expense-category">
+                    <option value="Materials">Materials</option>
+                    <option value="Labour">Labour</option>
+                    <option value="Overhead">Overhead</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <button type="submit">Add Expense</button>
+            </form>
+        </section>
+
+        </div>
+        <div class="bingo">
+        <!-- Expense Summary -->
+        <section class="summary">
+            <h2>Expense Summary</h2>
+            <div id="summary-details">
+                <p>Total Expense: <span id="total-expense">₹0</span></p>
+                <p>Remaining Budget: <span id="remaining-budget">N/A</span></p>
+            </div>
+            <!-- <canvas id="expense-chart"></canvas> -->
+            <div class="vis">
+                <label for="chart-type">Select Chart Type:</label>
+                <select id="chart-type">
+                    <option value="pie">Pie Chart</option>
+                    <option value="bar">Bar Chart</option>
+                    <option value="line">Line Chart</option>
+                </select>
+            </div>
+            <br>
+            <canvas id="expense-chart" style="max-height: 400px;"></canvas>
+
+        </section>
+
+        <!-- Expense Trends -->
+        <section class="trends">
+            <h2>Expense Trends Over Time</h2>
+            <canvas id="trends-chart"></canvas>
+        </section>
+        </div>
+        <div class="bingo">
+        <!-- AI Financial Advisor Section -->
+        <section class="ai-advisor">
+            <h2>AI Financial Advisor</h2>
+            <p id="financial-advice">Loading personalized advice...</p>
+        </section>
+
+        <!-- AI Chatbot Section -->
+        <section class="ai-chatbot">
+            <h2>AI Chatbot</h2>
+            <div id="chat-interface">
+                <div id="chat-log"
+                    style="background: #f9f9f9; padding: 10px; border-radius: 10px; height: 200px; overflow-y: auto; margin-bottom: 10px;">
+                    <!-- Chat messages will appear here -->
+                </div>
+                <form id="chat-form" style="display: flex; gap: 10px; flex-direction: column;">
+                    <input type="text" id="chat-input" placeholder="Ask me something..."
+                        style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" />
+                    <button type="submit"
+                        style="padding: 10px; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer;">Send</button>
+                </form>
+            </div>
+        </section>
+        </div>
+
+        <div class="bingo">
+        <!-- Taxes Calculator Section -->
+        <section class="tax-calculator">
+            <h2>Taxes Calculator</h2>
+            <form id="tax-form">
+                <label for="income">Annual Income (₹):</label>
+                <input type="number" id="income" placeholder="Enter annual income" required>
+
+                <label for="tax-deductions">Deductions (₹):</label>
+                <input type="number" id="tax-deductions" placeholder="Enter deductions" required>
+
+                <button type="submit">Calculate Taxes</button>
+            </form>
+            <div id="tax-results">
+                <p id="estimated-taxes">Estimated Taxes: ₹0</p>
+                <p id="tax-summary">Stay informed about deductions and credits!</p>
+            </div>
+        </section>
+
+        <!-- Tour Guide Section -->
+        <section class="tour-guide">
+            <h2>Tax Planning Guide</h2>
+            <p>Estimate your taxes and plan accordingly. This guide provides tips on how to reduce your tax liability:
+            </p>
+            <ul>
+                <li><strong>Tax Deductions:</strong> Contribute to retirement funds to save on taxes.</li>
+                <li><strong>Tax Credits:</strong> Explore available credits for education, homeownership, and more.</li>
+                <li><strong>Tax Planning:</strong> Plan ahead to avoid surprises during tax season.</li>
+            </ul>
+        </section>
+       </div>
+
     </main>
+
+    <footer>
+        <p>© 2025 Advanced Expense Tracker. All Rights Reserved.</p>
+    </footer>
+
+    <script>const expenseForm = document.getElementById('expense-form');
+        const budgetForm = document.getElementById('budget-form');
+        const totalExpenseDisplay = document.getElementById('total-expense');
+        const remainingBudgetDisplay = document.getElementById('remaining-budget');
+        const budgetStatus = document.getElementById('budget-status');
+        const expenseChartCanvas = document.getElementById('expense-chart');
+        const trendsChartCanvas = document.getElementById('trends-chart');
+        const chartTypeSelector = document.getElementById('chart-type');
+
+        // Data Storage
+        let totalExpense = 0;
+        let budget = null;
+        let expenseData = { Materials: 0, Labour: 0, Overhead: 0, Other: 0, budget: budget = 0 };
+        let expenseTrends = [];
+
+        // Expense Chart Initialization
+        let expenseChart = new Chart(expenseChartCanvas, {
+            type: 'pie',
+            data: {
+                labels: ['Materials', 'Labour', 'Overhead', 'Other'],
+                datasets: [
+                    {
+                        data: [0, 0, 0, 0],
+                        backgroundColor: ['#4caf50', '#ff9800', '#f44336', '#2196f3',],
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                },
+            },
+        });
+
+        // Trends Chart Initialization
+        const trendsChart = new Chart(trendsChartCanvas, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Expense Trends',
+                        data: [],
+                        borderColor: '#4caf50',
+                        fill: false,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'Date' } },
+                    y: { title: { display: true, text: 'Amount (₹)' } },
+                },
+            },
+        });
+
+        // Function to update the charts
+        function updateCharts() {
+            expenseChart.data.labels = Object.keys(expenseData);
+            expenseChart.data.datasets[0].data = Object.values(expenseData);
+            expenseChart.update();
+
+            trendsChart.data.labels = expenseTrends.map((entry) => entry.date);
+            trendsChart.data.datasets[0].data = expenseTrends.map((entry) => entry.amount);
+            trendsChart.update();
+        }
+
+        // Change the chart type dynamically
+        chartTypeSelector.addEventListener('change', () => {
+            const newType = chartTypeSelector.value;
+
+            expenseChart.destroy();
+            expenseChart = new Chart(expenseChartCanvas, {
+                type: newType,
+                data: {
+                    labels: Object.keys(expenseData),
+                    datasets: [
+                        {
+                            data: Object.values(expenseData),
+                            backgroundColor: ['#4caf50', '#ff9800', '#f44336', '#2196f3'],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'bottom' } },
+                    scales:
+                        newType === 'pie'
+                            ? undefined
+                            : {
+                                x: { title: { display: true, text: 'Categories' } },
+                                y: { beginAtZero: true, title: { display: true, text: 'Amount (₹)' } },
+                            },
+                },
+            });
+        });
+
+        // Expense Form Submission Handler
+        expenseForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            // const projectName = document.getElementById('project-name').value.trim();
+            const expenseName = document.getElementById('expense-name').value.trim();
+            const expenseAmount = parseFloat(document.getElementById('expense-amount').value);
+            const expenseCategory = document.getElementById('expense-category').value;
+
+            if (!expenseName || isNaN(expenseAmount)) {
+                alert('Please fill all fields correctly!');
+                return;
+            }
+
+            // Prevent exceeding budget
+            if (budget && totalExpense + expenseAmount > budget) {
+                alert('This expense exceeds your budget!');
+                return;
+            }
+
+            // Update Data
+            totalExpense += expenseAmount;
+            expenseData[expenseCategory] += expenseAmount;
+
+            // Track Expense Trend
+            const currentDate = new Date().toLocaleDateString();
+            expenseTrends.push({ date: currentDate, amount: totalExpense });
+
+            // Update UI and Alerts
+            totalExpenseDisplay.textContent = `₹${totalExpense}`;
+            if (budget) {
+                const remainingBudget = budget - totalExpense;
+                remainingBudgetDisplay.textContent = `₹${remainingBudget}`;
+                budgetStatus.textContent =
+                    remainingBudget <= 0
+                        ? 'Budget exceeded!'
+                        : remainingBudget <= budget * 0.1
+                            ? 'Warning: Approaching budget limit!'
+                            : 'Budget is under control.';
+            }
+            event.preventDefault(); generateFinancialAdvice();
+            updateCharts();
+            expenseForm.reset();
+        });
+
+        // Budget Form Submission Handler
+        budgetForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            budget = parseFloat(document.getElementById('budget-amount').value);
+            if (isNaN(budget) || budget <= 0) {
+                alert('Please enter a valid budget.');
+                return;
+            }
+
+            remainingBudgetDisplay.textContent = `₹${budget - totalExpense}`;
+            budgetStatus.textContent = 'Budget set successfully!';
+            budgetForm.reset();
+        });
+
+        function generateFinancialAdvice() {
+            const totalExpenses = totalExpense;
+            const budgetStatusMessage = budgetStatus.textContent;
+
+            let advice = "Your financial health looks great! Keep up the good work.";
+
+            if (totalExpenses > budget) {
+                advice = "You’ve exceeded your budget! Consider cutting back on non-essential expenses.";
+            } else if (totalExpenses > budget * 0.8) {
+                advice = "You’re approaching your budget limit! Monitor your spending closely.";
+            } else if (expenseData.Labour > expenseData.Materials) {
+                advice = "You’re spending more on Labour than Materials. Consider evaluating your staffing costs.";
+            } else if (totalExpenses < budget * 0.5) {
+                advice = "You’re under budget! Consider setting aside savings or investing the surplus.";
+            }
+
+            // Update the financial advice section
+            document.getElementById('financial-advice').textContent = advice;
+        }
+
+
+
+
+
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatLog = document.getElementById('chat-log');
+
+        // Handle chatbot form submission
+        chatForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const userMessage = chatInput.value.trim();
+
+            if (!userMessage) {
+                alert('Please enter a message!');
+                return;
+            }
+
+            // Display the user's message in the chat log
+            appendMessage('You', userMessage);
+
+            // Generate AI response
+            setTimeout(() => {
+                const aiResponse = generateChatbotResponse(userMessage);
+                appendMessage('Gemini AI', aiResponse);
+            }, 1000);
+
+            // Clear the input field
+            chatInput.value = '';
+        });
+
+        // Function to add messages to the chat log
+        function appendMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.style.marginBottom = '10px';
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatLog.appendChild(messageElement);
+
+            // Auto-scroll to the bottom
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        // Function to generate chatbot responses
+        function generateChatbotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+
+            // Responding to budget-related queries
+            if (lowerMessage.includes('budget')) {
+                return "Here's a tip: Make sure to allocate 20% of your income towards savings.";
+            }
+            // Responding to saving-related queries
+            else if (lowerMessage.includes('saving')) {
+                return "Building a savings fund is important. Start with small, consistent deposits.";
+            }
+            // Responding to investment-related queries
+            else if (lowerMessage.includes('investment')) {
+                return "Investing wisely can grow your wealth. Have you considered mutual funds or ETFs?";
+            }
+            // Responding to debt-related queries
+            else if (lowerMessage.includes('debt')) {
+                return "Paying down high-interest debt first can save you money in the long run. Prioritize it!";
+            }
+            // Responding to credit-related queries
+            else if (lowerMessage.includes('credit')) {
+                return "Good credit is essential for favorable loan rates. Keep an eye on your credit score and make timely payments.";
+            }
+            // Responding to retirement-related queries
+            else if (lowerMessage.includes('retirement')) {
+                return "Retirement planning is crucial. Consider contributing to an IRA or 401(k) to secure your future.";
+            }
+            // Responding to emergency fund-related queries
+            else if (lowerMessage.includes('emergency fund')) {
+                return "An emergency fund should cover 3-6 months of living expenses. Start small, but make it a priority!";
+            }
+            // Responding to tax-related queries
+            else if (lowerMessage.includes('tax')) {
+                return "Don't forget to maximize tax-saving strategies like contributing to retirement accounts or using tax credits.";
+            }
+            // Responding to general financial advice
+            else if (lowerMessage.includes('finance') || lowerMessage.includes('money')) {
+                return "Remember, financial planning involves budgeting, saving, investing, and planning for the future. Stay consistent!";
+            }
+            // Default response for unrecognized inputs
+            else {
+                return "I'm here to help! Could you clarify or provide more details?";
+            }
+        }
+
+
+        const taxForm = document.getElementById('tax-form');
+        const incomeInput = document.getElementById('income');
+        const deductionsInput = document.getElementById('tax-deductions');
+        const estimatedTaxesDisplay = document.getElementById('estimated-taxes');
+        const taxSummaryDisplay = document.getElementById('tax-summary');
+
+        // Tax Calculation Logic
+        function calculateTaxes(income, deductions) {
+            const taxableIncome = income - deductions;
+            let tax = 0;
+
+            // Simple tax slabs (can be updated as per requirements)
+            if (taxableIncome <= 250000) {
+                tax = 0;
+            } else if (taxableIncome <= 500000) {
+                tax = taxableIncome * 0.05;
+            } else if (taxableIncome <= 1000000) {
+                tax = taxableIncome * 0.2;
+            } else {
+                tax = taxableIncome * 0.3;
+            }
+
+            return tax;
+        }
+
+        // Handle Tax Form Submission
+        taxForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const income = parseFloat(incomeInput.value);
+            const deductions = parseFloat(deductionsInput.value);
+
+            if (isNaN(income) || isNaN(deductions)) {
+                alert('Please enter valid income and deduction values!');
+                return;
+            }
+
+            // Calculate taxes
+            const estimatedTaxes = calculateTaxes(income, deductions);
+            estimatedTaxesDisplay.textContent = `Estimated Taxes: ₹${estimatedTaxes.toFixed(2)}`;
+
+            // Tax summary message
+            if (estimatedTaxes > 0) {
+                taxSummaryDisplay.textContent = 'Consider maximizing deductions to reduce tax liability.';
+            } else {
+                taxSummaryDisplay.textContent = 'You are in the tax-exempt range. Good job!';
+            }
+        });
+    </script>
+
 </body>
 
 </html>
