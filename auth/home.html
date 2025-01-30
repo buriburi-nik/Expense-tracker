@@ -13,11 +13,12 @@
         :root {
             --primary-color: hsl(208, 92%, 54%);
             --title-color: hsl(220, 68%, 4%);
-            --text-color: hsl(220, 15%, 66%);
+            --text-color: hsl(217, 7%, 42%);
             --background-color: hsl(0, 0%, 100%);
             --input-bg: hsl(220, 50%, 97%);
-            --button-color: hsl(208, 92%, 54%);
-            --button-hover: hsl(208, 88%, 50%);
+            /* --button-color: hsl(208, 92%, 54%); */
+            --button-color: black;
+            --button-hover: hsl(180, 1%, 23%);
             --body-font: "Montserrat", sans-serif;
 
             --big-font-size: 3rem;
@@ -44,11 +45,13 @@
             display: flex;
             flex-direction: column;
             height: auto;
+            /* background-color: #D9D9F4; */
             background-color: var(--background-color);
             font-family: var(--body-font);
             align-items: center;
             /* padding: 20px; */
-        
+            overflow-x: hidden;
+
         }
 
         header {
@@ -56,9 +59,10 @@
             margin-bottom: 2rem;
             display: flex;
             justify-content: space-evenly;
+            gap: 100px;
             align-items: center;
             width: 100vw;
-            background-color: #f9f9f9;
+            background-color: #EEEEEE;
         }
 
         header h1 {
@@ -80,6 +84,11 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #fff;
+        }
+
+        img {
+            border-radius: 10px;
         }
 
         section h2 {
@@ -87,11 +96,13 @@
             color: var(--title-color);
             margin-bottom: 1rem;
         }
+
         ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
+
         form {
             display: flex;
             flex-direction: column;
@@ -113,6 +124,7 @@
             border-radius: 8px;
             border: 1px solid #ddd;
             background-color: var(--input-bg);
+            border-radius: 4rem;
         }
 
         form input:focus,
@@ -121,13 +133,14 @@
             outline: none;
         }
 
-        form button{
+        form button {
             background-color: var(--button-color);
             color: white;
             font-weight: var(--font-semi-bold);
             border: none;
             cursor: pointer;
             transition: background-color 0.4s, box-shadow 0.4s;
+            border-radius: 4rem;
         }
 
         form button:hover {
@@ -154,7 +167,7 @@
                 width: 100%;
             }
 
-            .welcome-message{
+            .welcome-message {
                 display: none;
             }
 
@@ -162,6 +175,7 @@
                 flex-direction: column;
                 align-items: center;
             }
+
             header h1 {
                 font-size: 2rem;
             }
@@ -176,9 +190,16 @@
                 font-size: 1rem;
             }
 
-            .bingo{
+            .bingo {
                 flex-direction: column;
-                width: 100%;
+                width: 90%;
+            }
+
+            main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
             }
         }
 
@@ -193,24 +214,25 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            width: 80%;
         }
 
-        .secondary{
+        .secondary {
             width: 100%;
 
         }
 
-        a{
+        a {
             text-decoration: none;
-              color: var(--button-color);
+            color: var(--button-color);
         }
 
-        a:hover{
+        a:hover {
             color: var(--button-hover);
         }
 
 
-        button{
+        button {
             font-weight: var(--font-semi-bold);
             border: none;
             cursor: pointer;
@@ -219,169 +241,186 @@
             padding: 10px 20px;
             border-radius: 8px;
             margin-top: 10px;
-          
+
         }
 
         button:hover {
             background-color: transparent;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+
         }
 
         /* Bingo Table */
-       .bingo {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        gap: 2rem;
-       }
+        .bingo {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            gap: 2rem;
+
+        }
+
+        .b1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 20px;
+            color: white;
+            transition: background-color 0.4s, box-shadow 0.4s;
+            margin-top: 10px;
+            text-align: center;
+            background-color: #FFB400;
+        }
     </style>
 </head>
 
 <body>
     <header>
-       
-        <div class="welcome-message"  id="welcomeMessage">Welcome, Guest!</div>
+
+        <div class="welcome-message" id="welcomeMessage">Welcome,Guest</div>
         <div style="padding:1rem;">
             <h1>Expense Tracker</h1>
             <p>Track expenses, set budgets, and monitor trends easily.</p>
         </div>
-        <button class="new" onclick="window.location.href='login.html'">Logout</button>
+        <button class="new" style="font-size: medium;" onclick="window.location.href='login.html'">Logout</button>
 
         <script>
-            // Retrieve the user's name from localStorage
             const name = localStorage.getItem('signupName') || 'Guest';
-
-            // Display the name in the header
+            
             document.getElementById('welcomeMessage').textContent = `Welcome, ${name}!`;
+        
         </script>
+
     </header>
 
     <main>
         <div class="bingo">
 
-        <!-- Budget and Alerts -->
-        <section class="budget">
-            <h2>Set Budget</h2>
-            <form id="budget-form">
-                <label for="budget-amount">Budget Limit (₹):</label>
-                <input type="number" id="budget-amount" placeholder="Enter your budget limit" required>
-                <button type="submit">Set Budget</button>
-            </form>
-            <p id="budget-status">No budget set yet.</p>
-            <img src="../img/money.gif" style=" width: 100%; height: auto;" alt="">
-        </section>
-            
-        <!-- Expense Form -->
-        <section class="tracker">
-            <h2>Add Expense</h2>
-            <form id="expense-form">
-                <!-- <label for="project-name">Project Name:</label>
-                <input type="text" id="project-name" placeholder="Enter project name" required> -->
-
-                <label for="expense-name">Expense Name:</label>
-                <input type="text" id="expense-name" placeholder="Enter expense name" required>
-
-                <label for="expense-amount">Amount (₹):</label>
-                <input type="number" id="expense-amount" placeholder="Enter amount" required>
-
-                <label for="expense-category">Category:</label>
-                <select id="expense-category">
-                    <option value="Materials">Materials</option>
-                    <option value="Labour">Labour</option>
-                    <option value="Overhead">Overhead</option>
-                    <option value="Other">Other</option>
-                </select>
-
-                <button type="submit">Add Expense</button>
-            </form>
-        </section>
-
-        </div>
-        <div class="bingo">
-        <!-- Expense Summary -->
-        <section class="summary">
-            <h2>Expense Summary</h2>
-            <div id="summary-details">
-                <p>Total Expense: <span id="total-expense">₹0</span></p>
-                <p>Remaining Budget: <span id="remaining-budget">N/A</span></p>
-            </div>
-            <!-- <canvas id="expense-chart"></canvas> -->
-            <div class="vis">
-                <label for="chart-type">Select Chart Type:</label>
-                <select id="chart-type">
-                    <option value="pie">Pie Chart</option>
-                    <option value="bar">Bar Chart</option>
-                    <option value="line">Line Chart</option>
-                </select>
-            </div>
-            <br>
-            <canvas id="expense-chart" style="max-height: 400px;"></canvas>
-
-        </section>
-
-        <!-- Expense Trends -->
-        <section class="trends">
-            <h2>Expense Trends Over Time</h2>
-            <canvas id="trends-chart"></canvas>
-        </section>
-        </div>
-        <div class="bingo">
-        <!-- AI Financial Advisor Section -->
-        <section class="ai-advisor">
-            <h2>AI Financial Advisor</h2>
-            <p id="financial-advice">Loading personalized advice...</p>
-        </section>
-
-        <!-- AI Chatbot Section -->
-        <section class="ai-chatbot">
-            <h2>AI Chatbot</h2>
-            <div id="chat-interface">
-                <div id="chat-log"
-                    style="background: #f9f9f9; padding: 10px; border-radius: 10px; height: 200px; overflow-y: auto; margin-bottom: 10px;">
-                    <!-- Chat messages will appear here -->
-                </div>
-                <form id="chat-form" style="display: flex; gap: 10px; flex-direction: column;">
-                    <input type="text" id="chat-input" placeholder="Ask me something..."
-                        style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" />
-                    <button type="submit"
-                        style="padding: 10px; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer;">Send</button>
+            <!-- Budget and Alerts -->
+            <section class="budget" style="background-color: #C7C2EF;">
+                <h2>Set Budget </h2>
+                <form id="budget-form">
+                    <label for="budget-amount">Budget Limit (₹):</label>
+                    <input type="number" id="budget-amount" placeholder="Enter your budget limit" required>
+                    <button type="submit">Set Budget</button>
                 </form>
-            </div>
-        </section>
+                <p id="budget-status">No budget set yet.</p>
+
+                <!-- display budget -->
+                <span id="budget1" class="b1">N/A</span>
+                <script>
+                    // display budget-amount in span element of class "b1"
+                </script>
+            </section>
+
+            <!-- Expense Form -->
+            <section class="tracker" style="background-color: #FAE5DC;">
+                <h2>Add Expense</h2>
+                <form id="expense-form">
+                    <label for="expense-name">Expense Name:</label>
+                    <input type="text" id="expense-name" placeholder="Enter expense name" required>
+
+                    <label for="expense-amount">Amount (₹):</label>
+                    <input type="number" id="expense-amount" placeholder="Enter amount" required>
+
+                    <label for="expense-category">Category:</label>
+                    <select id="expense-category">
+                        <option value="Materials">Materials</option>
+                        <option value="Labour">Labour</option>
+                        <option value="Overhead">Overhead</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <button type="submit">Add Expense</button>
+
+                </form>
+            </section>
+
+
+            <!-- Expense Trends -->
+            <section class="trends" style="background-color: #C0EFE9;">
+                <h2>Expense vs Budget </h2>
+                <p>Total Expense: <span id="total-expense">₹0</span></p>
+                <p style="margin-bottom: 0.2rem;">Remaining Budget: <span id="remaining-budget">N/A</span></p>
+                <canvas id="trends-chart" style="display: none;"></canvas>
+                <canvas id="budget-pie-chart"></canvas>
+            </section>
         </div>
 
         <div class="bingo">
-        <!-- Taxes Calculator Section -->
-        <section class="tax-calculator">
-            <h2>Taxes Calculator</h2>
-            <form id="tax-form">
-                <label for="income">Annual Income (₹):</label>
-                <input type="number" id="income" placeholder="Enter annual income" required>
+            <!-- Expense Summary -->
+            <section class="summary" style="background-color: aliceblue">
+                <h2>Expense Summary</h2>
+                <div class="vis">
+                    <label for="chart-type">Select Chart Type:</label>
+                    <select id="chart-type">
+                        <option value="pie">Pie Chart</option>
+                        <option value="bar">Bar Chart</option>
+                        <option value="line">Line Chart</option>
+                    </select>
+                </div>
+                <br>
+                <canvas id="expense-chart" style="max-height: 400px;"></canvas>
+            </section>
+            <!-- AI Financial Advisor Section -->
+            <section class="ai-advisor" style="background-color: #C7C2EF;">
+                <h2>AI Financial Advisor</h2>
+                <p id="financial-advice">Loading personalized advice...</p>
+                <br>
+                <h2>AI Chatbot</h2>
+                <div id="chat-interface">
+                    <div id="chat-log"
+                        style="background: #f9f9f9; padding: 10px; border-radius: 10px; height: 200px; overflow-y: auto; margin-bottom: 10px;">
+                        <!-- Chat messages will appear here -->
+                    </div>
+                    <form id="chat-form" style="display: flex; gap: 10px; flex-direction: column;">
+                        <input type="text" id="chat-input" placeholder="Ask me something..."
+                            style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" />
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
 
-                <label for="tax-deductions">Deductions (₹):</label>
-                <input type="number" id="tax-deductions" placeholder="Enter deductions" required>
+            </section>
+        </div>
 
-                <button type="submit">Calculate Taxes</button>
-            </form>
-            <div id="tax-results">
-                <p id="estimated-taxes">Estimated Taxes: ₹0</p>
-                <p id="tax-summary">Stay informed about deductions and credits!</p>
-            </div>
-        </section>
 
-        <!-- Tour Guide Section -->
-        <section class="tour-guide">
-            <h2>Tax Planning Guide</h2>
-            <p>Estimate your taxes and plan accordingly. This guide provides tips on how to reduce your tax liability:
-            </p>
-            <ul>
-                <li><strong>Tax Deductions:</strong> Contribute to retirement funds to save on taxes.</li>
-                <li><strong>Tax Credits:</strong> Explore available credits for education, homeownership, and more.</li>
-                <li><strong>Tax Planning:</strong> Plan ahead to avoid surprises during tax season.</li>
-            </ul>
-        </section>
-       </div>
+        <div class="bingo">
+            <!-- Taxes Calculator Section -->
+            <section class="tax-calculator" style="margin-bottom:0; background-color: #FAE5DC;">
+                <h2>Taxes Calculator</h2>
+                <form id="tax-form">
+                    <label for="income">Annual Income (₹):</label>
+                    <input type="number" id="income" placeholder="Enter annual income" required>
+
+                    <label for="tax-deductions">Deductions (₹):</label>
+                    <input type="number" id="tax-deductions" placeholder="Enter deductions" required>
+
+                    <button type="submit">Calculate Taxes</button>
+                </form>
+                <div id="tax-results">
+                    <p id="estimated-taxes">Estimated Taxes: ₹0</p>
+                    <p id="tax-summary">Stay informed about deductions and credits!</p>
+                </div>
+            </section>
+
+            <img src="../img/tax.jpg" alt="" style="width: 100%; height: 400px;">
+
+
+            <section class="tour-guide" style="margin-bottom:0 ; background-color: #C0EFE9;">
+                <h2>Tax Planning Guide</h2>
+                <p>Estimate your taxes and plan accordingly. This guide provides tips on how to reduce your tax
+                    liability:
+                </p>
+                <ul>
+                    <li><strong>Tax Deductions:</strong> Contribute to retirement funds to save on taxes.</li>
+                    <li><strong>Tax Credits:</strong> Explore available credits for education, homeownership, and more.
+                    </li>
+                    <li><strong>Tax Planning:</strong> Plan ahead to avoid surprises during tax season.</li>
+                </ul>
+            </section>
+        </div>
 
     </main>
 
@@ -398,11 +437,35 @@
         const trendsChartCanvas = document.getElementById('trends-chart');
         const chartTypeSelector = document.getElementById('chart-type');
 
+        // 
+
         // Data Storage
         let totalExpense = 0;
         let budget = null;
-        let expenseData = { Materials: 0, Labour: 0, Overhead: 0, Other: 0, budget: budget = 0 };
+        let expenseData = { Materials: 0, Labour: 0, Overhead: 0, Other: 0 };
         let expenseTrends = [];
+
+        // Budget Pie Chart Initialization
+        const budgetPieChartCanvas = document.getElementById('budget-pie-chart');
+        let budgetPieChart = new Chart(budgetPieChartCanvas, {
+            type: 'pie',
+
+            data: {
+                labels: ['Total Expense', 'Remaining Budget'],
+                datasets: [
+                    {
+                        data: [0, 0],  // Initial data (Total Expense = 0, Remaining Budget = 0)
+                        backgroundColor: ['#B1C29E', '#FFF2AF'],  // Red for Total Expense, Green for Remaining Budget
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                },
+            },
+        });
 
         // Expense Chart Initialization
         let expenseChart = new Chart(expenseChartCanvas, {
@@ -412,7 +475,7 @@
                 datasets: [
                     {
                         data: [0, 0, 0, 0],
-                        backgroundColor: ['#4caf50', '#ff9800', '#f44336', '#2196f3',],
+                        backgroundColor: ['#F2C6D9', '#FFF7F0', '#B5E0C3', '#F9E0C2'],
                     },
                 ],
             },
@@ -447,15 +510,24 @@
             },
         });
 
-        // Function to update the charts
+        // Function to update all charts, including the Budget Pie Chart
         function updateCharts() {
+            // Update Expense Chart (Pie)
             expenseChart.data.labels = Object.keys(expenseData);
             expenseChart.data.datasets[0].data = Object.values(expenseData);
             expenseChart.update();
 
+            // Update Trends Chart (Line)
             trendsChart.data.labels = expenseTrends.map((entry) => entry.date);
             trendsChart.data.datasets[0].data = expenseTrends.map((entry) => entry.amount);
             trendsChart.update();
+
+            // Update Budget Pie Chart
+            if (budget !== null) {
+                const remainingBudget = budget - totalExpense;
+                budgetPieChart.data.datasets[0].data = [totalExpense, remainingBudget];
+                budgetPieChart.update();
+            }
         }
 
         // Change the chart type dynamically
@@ -492,7 +564,6 @@
         expenseForm.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            // const projectName = document.getElementById('project-name').value.trim();
             const expenseName = document.getElementById('expense-name').value.trim();
             const expenseAmount = parseFloat(document.getElementById('expense-amount').value);
             const expenseCategory = document.getElementById('expense-category').value;
@@ -528,8 +599,8 @@
                             ? 'Warning: Approaching budget limit!'
                             : 'Budget is under control.';
             }
-            event.preventDefault(); generateFinancialAdvice();
-            updateCharts();
+
+            updateCharts();  // Update all charts after expense is added
             expenseForm.reset();
         });
 
@@ -545,6 +616,11 @@
 
             remainingBudgetDisplay.textContent = `₹${budget - totalExpense}`;
             budgetStatus.textContent = 'Budget set successfully!';
+
+            //display budget - amount in span element of class "b1"
+            document.getElementById('budget1').textContent = `₹${budget}`;
+
+            updateCharts();  // Update all charts when the budget is set
             budgetForm.reset();
         });
 
