@@ -333,9 +333,9 @@
 
                     <label for="expense-category">Category:</label>
                     <select id="expense-category">
-                        <option value="Materials">Materials</option>
-                        <option value="Labour">Labour</option>
-                        <option value="Overhead">Overhead</option>
+                        <option value="Materials">Food</option>
+                        <option value="Labour">Transport</option>
+                        <option value="Overhead">Entertainment</option>
                         <option value="Other">Other</option>
                     </select>
 
@@ -478,7 +478,7 @@
         let expenseChart = new Chart(expenseChartCanvas, {
             type: 'pie',
             data: {
-                labels: ['Materials', 'Labour', 'Overhead', 'Other'],
+                labels: ['Food', 'Transport', 'Entertainment', 'Other'],
                 datasets: [
                     {
                         data: [0, 0, 0, 0],
