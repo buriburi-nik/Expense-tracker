@@ -1,4 +1,4 @@
-Expense Tracker
+<h1>Expense Tracker</h1>
 
 An intuitive and efficient expense tracking application designed to help users manage their finances effectively.
 
@@ -47,7 +47,7 @@ For backend:
 
 node server.js
 
-Open http://localhost:3000 in your browser.
+Open 
 
 Usage
 
@@ -59,7 +59,7 @@ Monitor expense summaries and filter data by categories or date range.
 
 Edit or remove expenses as needed to keep records accurate.
 
-Live Demo
+Live Demo https://expense-tracker-lake-mu-88.vercel.app/
 
 Check out the hosted version of the application: Expense Tracker
 
