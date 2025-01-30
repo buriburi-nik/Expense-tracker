@@ -165,6 +165,7 @@
 
             section {
                 width: 100%;
+                margin-bottom: 0;
             }
 
             .welcome-message {
@@ -201,6 +202,10 @@
                 flex-direction: column;
                 align-items: center;
                 padding: 20px;
+            }
+
+            .a , .b , .c{
+                margin-bottom: 2rem;
             }
         }
 
@@ -297,7 +302,7 @@
     </header>
 
     <main>
-        <div class="bingo">
+        <div class="bingo a">
 
             <!-- Budget and Alerts -->
             <section class="budget" style="background-color: #C7C2EF;">
@@ -350,7 +355,7 @@
             </section>
         </div>
 
-        <div class="bingo">
+        <div class="bingo b">
             <!-- Expense Summary -->
             <section class="summary" style="background-color: aliceblue">
                 <h2>Expense Summary</h2>
@@ -387,22 +392,23 @@
         </div>
 
 
-        <div class="bingo">
+        <div class="bingo c">
             <!-- Taxes Calculator Section -->
             <section class="tax-calculator" style="margin-bottom:0; background-color: #FAE5DC;">
                 <h2>Taxes Calculator</h2>
                 <form id="tax-form">
                     <label for="income">Annual Income (₹):</label>
                     <input type="number" id="income" placeholder="Enter annual income" required>
-
-                    <label for="tax-deductions">Deductions (₹):</label>
-                    <input type="number" id="tax-deductions" placeholder="Enter deductions" required>
-
+            
+                    <label for="tax-deductions">Deductions (₹) (Optional):</label>
+                    <input type="number" id="tax-deductions" placeholder="Enter deductions (optional)">
+            
                     <button type="submit">Calculate Taxes</button>
                 </form>
                 <div id="tax-results">
                     <p id="estimated-taxes">Estimated Taxes: ₹0</p>
-                    <p id="tax-summary">Stay informed about deductions and credits!</p>
+                    <p id="tax-summary">Tax calculation is illustrative. Consult official tax resources for accurate calculations.
+                    </p>
                 </div>
             </section>
 
@@ -688,101 +694,67 @@
         }
 
         // Function to generate chatbot responses
-        function generateChatbotResponse(message) {
+       function generateChatbotResponse(message) {
             const lowerMessage = message.toLowerCase();
 
-            // Responding to budget-related queries
             if (lowerMessage.includes('budget')) {
-                return "Here's a tip: Make sure to allocate 20% of your income towards savings.";
-            }
-            // Responding to saving-related queries
-            else if (lowerMessage.includes('saving')) {
-                return "Building a savings fund is important. Start with small, consistent deposits.";
-            }
-            // Responding to investment-related queries
-            else if (lowerMessage.includes('investment')) {
-                return "Investing wisely can grow your wealth. Have you considered mutual funds or ETFs?";
-            }
-            // Responding to debt-related queries
-            else if (lowerMessage.includes('debt')) {
-                return "Paying down high-interest debt first can save you money in the long run. Prioritize it!";
-            }
-            // Responding to credit-related queries
-            else if (lowerMessage.includes('credit')) {
-                return "Good credit is essential for favorable loan rates. Keep an eye on your credit score and make timely payments.";
-            }
-            // Responding to retirement-related queries
-            else if (lowerMessage.includes('retirement')) {
-                return "Retirement planning is crucial. Consider contributing to an IRA or 401(k) to secure your future.";
-            }
-            // Responding to emergency fund-related queries
-            else if (lowerMessage.includes('emergency fund')) {
-                return "An emergency fund should cover 3-6 months of living expenses. Start small, but make it a priority!";
-            }
-            // Responding to tax-related queries
-            else if (lowerMessage.includes('tax')) {
-                return "Don't forget to maximize tax-saving strategies like contributing to retirement accounts or using tax credits.";
-            }
-            // Responding to general financial advice
-            else if (lowerMessage.includes('finance') || lowerMessage.includes('money')) {
-                return "Remember, financial planning involves budgeting, saving, investing, and planning for the future. Stay consistent!";
-            }
-            // Default response for unrecognized inputs
-            else {
-                return "I'm here to help! Could you clarify or provide more details?";
+                return "Budgeting is key to financial control. It's not about restricting yourself, but about consciously allocating your resources.\nTips:\n* Track your spending meticulously for a month.\n* Automate savings by setting up recurring transfers.\n* Review your budget regularly and adjust it as needed.";
+            } else if (lowerMessage.includes('saving')) {
+                return "Saving is the cornerstone of financial security.\nTips:\n* Set clear, achievable savings goals with timelines.\n* Automate your savings by setting up automatic transfers.\n* Explore high-yield savings accounts or money market accounts.";
+            } else if (lowerMessage.includes('investment')) {
+                return "Investing is essential for long-term wealth growth.\nTips:\n* Understand your risk tolerance and time horizon.\n* Diversify your investments across different asset classes.\n* Consider investing in low-cost index funds or ETFs.";
+            } else if (lowerMessage.includes('debt')) {
+                return "Managing debt is crucial for financial well-being.\nTips:\n* List all your debts, including interest rates and balances.\n* Prioritize paying off high-interest debt first.\n* Create a debt repayment plan and stick to it.";
+            } else if (lowerMessage.includes('credit')) {
+                return "A good credit score is essential for accessing affordable credit.\nTips:\n* Pay your bills on time, every time.\n* Keep your credit utilization low (below 30% is ideal).\n* Check your credit report regularly for errors.";
+            } else if (lowerMessage.includes('retirement')) {
+                return "Retirement planning is a long-term endeavor that requires careful consideration.\nTips:\n* Start saving for retirement as early as possible.\n* Contribute to tax-advantaged retirement accounts.\n* Diversify your retirement investments.";
+            } else if (lowerMessage.includes('emergency fund')) {
+                return "An emergency fund is your financial safety net.\nTips:\n* Aim to save 3-6 months of essential living expenses.\n* Keep your emergency fund in a readily accessible, liquid account.\n* Replenish your emergency fund as soon as possible after you use it.";
+            } else if (lowerMessage.includes('tax')) {
+                return "Understanding taxes can save you money.\nTips:\n* Keep accurate records of your income and expenses.\n* Explore tax-saving strategies, such as contributing to retirement accounts.\n* File your tax returns on time to avoid penalties.";
+            } else if (lowerMessage.includes('finance') || lowerMessage.includes('money')) {
+                return "Personal finance is about managing your money wisely.\nTips:\n* Set SMART financial goals (Specific, Measurable, Achievable, Relevant, Time-bound).\n* Develop a comprehensive financial plan.\n* Educate yourself about personal finance through books, articles, and online resources.";
+            } else {
+                return "I'm here to help with your personal finance questions! Ask me about budgeting, saving, investing, debt, credit, retirement, taxes, or any other financial topic.  The more specific your questions, the more detailed and informative my responses can be.";
             }
         }
+                   document.getElementById('tax-form').addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    const income = parseFloat(document.getElementById('income').value);
+                    let deductions = parseFloat(document.getElementById('tax-deductions').value);
+
+                    if (isNaN(income) || income < 0) {
+                        alert("Please enter a valid number for income.");
+                        return;
+                    }
+
+                    // Handle optional deductions: If no deduction is entered, treat it as 0
+                    if (isNaN(deductions) || deductions < 0) {
+                        deductions = 0;
+                    }
+
+                    const taxableIncome = Math.max(0, income - deductions);
+
+                    let tax = 0;
+                    // Simplified tax calculation (Illustrative - Consult official resources)
+                    if (taxableIncome <= 250000) {
+                        tax = 0;
+                    } else if (taxableIncome <= 500000) {
+                        tax = (taxableIncome - 250000) * 0.05;
+                    } else if (taxableIncome <= 1000000) {
+                        tax = 12500 + (taxableIncome - 500000) * 0.20;
+                    } else {
+                        tax = 112500 + (taxableIncome - 1000000) * 0.30;
+                    }
 
 
-        const taxForm = document.getElementById('tax-form');
-        const incomeInput = document.getElementById('income');
-        const deductionsInput = document.getElementById('tax-deductions');
-        const estimatedTaxesDisplay = document.getElementById('estimated-taxes');
-        const taxSummaryDisplay = document.getElementById('tax-summary');
+                    document.getElementById('estimated-taxes').textContent = `Estimated Taxes: ₹${tax.toFixed(2)}`;
 
-        // Tax Calculation Logic
-        function calculateTaxes(income, deductions) {
-            const taxableIncome = income - deductions;
-            let tax = 0;
-
-            // Simple tax slabs (can be updated as per requirements)
-            if (taxableIncome <= 250000) {
-                tax = 0;
-            } else if (taxableIncome <= 500000) {
-                tax = taxableIncome * 0.05;
-            } else if (taxableIncome <= 1000000) {
-                tax = taxableIncome * 0.2;
-            } else {
-                tax = taxableIncome * 0.3;
-            }
-
-            return tax;
-        }
-
-        // Handle Tax Form Submission
-        taxForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const income = parseFloat(incomeInput.value);
-            const deductions = parseFloat(deductionsInput.value);
-
-            if (isNaN(income) || isNaN(deductions)) {
-                alert('Please enter valid income and deduction values!');
-                return;
-            }
-
-            // Calculate taxes
-            const estimatedTaxes = calculateTaxes(income, deductions);
-            estimatedTaxesDisplay.textContent = `Estimated Taxes: ₹${estimatedTaxes.toFixed(2)}`;
-
-            // Tax summary message
-            if (estimatedTaxes > 0) {
-                taxSummaryDisplay.textContent = 'Consider maximizing deductions to reduce tax liability.';
-            } else {
-                taxSummaryDisplay.textContent = 'You are in the tax-exempt range. Good job!';
-            }
-        });
-    </script>
+                });
+            
+    // </script>
 
 </body>
 
